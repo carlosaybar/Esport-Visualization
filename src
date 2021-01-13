@@ -1,0 +1,77 @@
+---
+title: "Data Visualization for Esports"
+author: "Carlos aybar"
+output: html_notebook
+
+---
+```{r}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+### importing the data
+```{r}
+esport <- read.csv("EsportsEarningsSince1998.csv")
+View(esport)
+```
+
+### creating a barplot of online earnings for each genre
+```{r}
+
+
+
+ggplot(esport, aes(x=OnlineEarnings/1000, y=Genre,  fill=Genre)) + 
+  geom_bar(stat = "identity") +
+labs(title = "Online Earnings for each Genre" ,
+subtitle = "Source: Esports Earnings Since 1998" ,
+x = "Online Earnings Divided by 1000" ,
+y = "Genre")
+
+
+```
+
+
+
+### pie Chart
+```{r}
+ggplot(esport, aes(x="", y=TotalPlayers, fill=Genre)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+labs(title = "Pie Chart of the Players who Received a price for each game" ,
+subtitle = "Source: Esports Earnings Since 1998" ,
+x = "" ,
+y = "Players who receiced a price")
+```
+
+
+
+### line plot of the number of the total earnings vs number of tournaments
+```{r}
+ggplot(data = esport , aes(x = TotalTournaments , y = TotalEarnings)) +
+geom_point(color = "blue")  +
+  geom_smooth(color = "red")+
+labs(title = "Total Earnings vs. Number of Tournaments" ,
+subtitle = "Source: Esports Earnings Since 1998" ,
+x = "Number of Tournaments" ,
+y = "Total Earnings")
+
+```
+
+### scatterplot of the total earnings vs the release date
+```{r}
+
+
+ggplot(data = esport , aes(x = ReleaseDate , y = TotalEarnings)) +
+geom_point(color = "red")  +
+labs(title = "Total Earnings vs. Release Date" ,
+subtitle = "Source: Esports Earnings Since 1998" ,
+x = "Release Date" ,
+y = "Total Earnings")
+
+
+
+```
